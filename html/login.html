@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+		<title>
+		</title>
+		<script type="text/javascript" src="../Ryanjs/login/style.js">
+		</script>
+		<link href="../Ryancss/login_public.css" rel="stylesheet" type="text/css"
+		/>
+		<link href="../Ryancss/login_style.css" rel="stylesheet" type="text/css"
+		/>
+		<style>
+			.display-block{ display :block ; } .display-none{ display :none ; } .logindiv{
+			display: flex; justify-content: center; } .loginimg{ width: 45px; height:
+			45px; margin: 0 10px; }
+		</style>
+	</head>
+	<body>
+		<div class="main_login">
+			<div class="tit">
+				<span class="active_tit">
+					登录
+				</span>
+				<span class="sp2" tapmode onclick="openWin('reg_frm')">
+					注册
+				</span>
+				<div class="clear">
+				</div>
+			</div>
+			<div class="main_box">
+				<div class="box_con box_log">
+					<div class="con_bg">
+						<span class="first_sp">
+							<input type="text" minlength="11" maxlength="11" id="username" placeholder="请输入账号"
+							/>
+						</span>
+						<span class="second_sp thrid_sp">
+							<input id="password" type="password" placeholder="请输入密码">
+						</span>
+						<span class="second_sp thrid_sp" style="display:none">
+							<input id="share" type="text" minlength="6" maxlength="6" placeholder="邀请码(选填)"
+							/>
+						</span>
+						<!-- <span class="second_sp thrid_sp"><input id="share" type="text" minlength="6" maxlength="6" placeholder="邀请码(选填)"/></span> -->
+					</div>
+					<a onclick="loginTo()" class="log_btn">
+						登录
+					</a>
+					<a tapmode onclick="openWin('repass')" class="forget_btn">
+						忘记密码？
+					</a>
+				</div>
+			</div>
+			<div class="footer_pic">
+				<span class="display-none" id="display-block-Is_Quick_login">
+					<div class="logindiv">
+						<img class="loginimg" onclick="QQ_login()" src="data:image/png;base64,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"
+						alt="QQ" class="pic2" />
+						<img class="loginimg" onclick="WX_login()" src="data:image/png;base64,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"
+						alt="微信" class="pic2" />
+					</div>
+				</span>
+				<img src="data:image/png;base64,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"
+				class="pic1" />
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../script/api.js">
+	</script>
+	<script type="text/javascript">
+		var api_url = localStorage.getItem('api_url');
+		var Other_type = '';
+		var user = '';
+		var pass = '';
+		var Other_name = '';
+		var Other_img = '';
+		var share_code = '';//邀请码
+
+		var qq;
+		var wx;
+		apiready = function() {
+			qq = api.require('QQPlus');
+			wx = api.require('wx');
+			api.parseTapmode();
+			var header = $api.byId('aui-header');
+			$api.fixStatusBar(header);
+			var headerPos = $api.offset(header);
+			var body_h = $api.offset($api.dom('body')).h;
+
+			if (api.pageParam.user) {
+				var username = $api.byId('username');
+				var password = $api.byId('password');
+				password.value = api.pageParam.pass;
+				username.value = api.pageParam.user;
+
+			}
+
+			/*	if(api.systemType == 'ios') {
+				var az = $api.byId('login_az');
+				az.remove();
+			}else{
+				var ios = $api.byId('login_ios');
+				ios.remove();
+			}
+*/
+
+			//微信快捷登录是否开放
+			if (localStorage.getItem('Is_Quick_login') == 1) {
+
+				var obj = document.getElementById("display-block-Is_Quick_login");
+				obj.setAttribute("class", "display-block");
+			}
+
+		}
+
+		function closeWin() {
+			api.closeWin({});
+		}
+
+		// function toWin(name){
+		//   api.closeToWin({
+		//       name: name
+		//   });
+		// }
+		function openWin(name) {
+			var delay = 0;
+			if (api.systemType != 'ios') {
+				delay = 300;
+			}
+			api.openWin({
+				name: name,
+				url: name + '.html',
+				bounces: false,
+				delay: delay,
+				slidBackEnabled: true,
+				bgColor: '#000',
+				animation: {
+					type: "reveal",
+					//动画类型（详见动画类型常量）
+					//		subType: "from_bottom", //动画子类型（详见动画子类型常量）
+					duration: 400
+				},
+				vScrollBarEnabled: false
+			});
+		}
+
+		function loginTo() {
+			var username = $api.val($api.byId('username'));
+			var password = $api.val($api.byId('password'));
+
+			if (username == '') {
+
+				api.toast({
+					msg: '请输入用户名',
+					duration: 5000,
+					location: 'middle'
+				});
+				return;
+			}
+			if (password == '') {
+
+				api.toast({
+					msg: '请输入密码',
+					duration: 5000,
+					location: 'middle'
+				});
+				return;
+			}
+
+			api.closeWin({
+				name: 'reg_frm'
+			});
+
+			//请求数据库并存储用户信息
+			var api_url = localStorage.getItem('api_url');
+			api.ajax({
+				url: api_url + '/login/login/veifys.html',
+				method: 'get',
+				data: {
+					values: {
+						key: 'p2piunink',
+						//安全码
+						username: username,
+						passwd: password,
+						imei: api.deviceId
+					}
+				}
+			},
+			function(ret, err) {
+				if (ret) {
+					if (ret.code == 9) { //封禁
+
+						api.hideProgress();
+
+						api.toast({
+							msg: ret.status,
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+					} else if (ret.code == 8) { //开启设备限制
+
+						api.hideProgress();
+
+						api.toast({
+							msg: ret.status,
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+
+					} else if (ret.code == 3) {
+
+						api.hideProgress();
+
+						api.toast({
+							msg: '安全码错误 请联系微信 2327299920',
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+					} else if (ret.code == 0) {
+						/*    api.hideProgress();
+                alert('账号或密码不正确');
+  原弹窗提示  */
+
+						api.hideProgress();
+
+						api.toast({
+							msg: '账号或密码不正确',
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+					} else if (ret.code == 1) {
+						/*       alert('登录成功');
+						      原弹窗提示  */
+
+						api.toast({
+							msg: '登陆成功！',
+							duration: 5000,
+							location: 'middle'
+						});
+
+						//alert( JSON.stringify( ret ) );
+						localStorage.setItem('accountLogin', 0);
+
+						localStorage.setItem('user_id', ret.msg['id']); //用户ID
+						localStorage.setItem('parentid', ret.msg['parentid']); //父ID
+						localStorage.setItem('nick_name', ret.msg['nick_name']); //昵称
+						localStorage.setItem('status', ret.msg['status']); //封号状态
+						localStorage.setItem('app_name', ret.msg['app_name']); //APP名字
+						localStorage.setItem('player_starttimes', ret.msg['player_starttimes']); //播放器记录设置
+						localStorage.setItem('user_name', username); //用户名
+						localStorage.setItem('password', password); //密码
+						localStorage.setItem('user_time', ret.msg['time']); //会员到期时间
+						localStorage.setItem('share_ma', ret.msg['share_ma']); //邀请码
+						localStorage.setItem('sign', ret.msg['sign']); //积分
+						localStorage.setItem('money', ret.msg['money']); //余额
+						localStorage.setItem('headimgurl', ret.msg['headimgurl']); //头像
+						localStorage.setItem('txje', ret.msg['txje']); //提现金额
+						localStorage.setItem('vip1', ret.msg['vip1']); //体验
+						localStorage.setItem('vip2', ret.msg['vip2']); //月卡
+						localStorage.setItem('vip3', ret.msg['vip3']); //季卡
+						localStorage.setItem('vip4', ret.msg['vip4']); //半年
+						localStorage.setItem('vip5', ret.msg['vip5']); //一年
+						localStorage.setItem('vip6', ret.msg['vip6']); //永久
+						localStorage.setItem('daili_price', ret.msg['daili_price']); //代理升级价格
+						localStorage.setItem('zfb', ret.msg['zfb']); //支付宝
+						localStorage.setItem('qdtime', ret.msg['qdtime']); //签到时间
+						//	localStorage.setItem('user_advert', ret.msg['advert']);
+						//	localStorage.setItem('user_code', ret.msg['code']);			
+						localStorage.setItem('user_weichat', ret.msg['weichat']); //上级微信
+						localStorage.setItem('tudi', ret.msg['tudi']); //团队数量
+						localStorage.setItem('power', ret.msg['power']); //权限
+						localStorage.setItem('Source', ret.msg['Source']); //来源
+						localStorage.setItem('app_working_mode', ret.msg['app_working_mode']); //APP 工作模式   
+						localStorage.setItem('vip_movies_theme', ret.msg['vip_movies_theme']); //VIP 影视主题
+						localStorage.setItem('app_share_help', ret.msg['app_share_help']); //APP邀请页帮助信息
+						localStorage.setItem('app_Invitation_slogans', ret.msg['app_Invitation_slogans']); //APP分享 邀请标语
+						localStorage.setItem('app_secret_key', ret.msg['app_secret_key']); //APP 私人影片kEY
+						localStorage.setItem('app_secret_content', ret.msg['app_secret_content']); //APP 私人影片公告
+						localStorage.setItem('index_video_num', ret.msg['index_video_num']); //首页调用推荐影视数量
+						localStorage.setItem('look_record_num', ret.msg['look_record_num']); //观看记录保留数量
+						localStorage.setItem('upload_headimg_integral', ret.msg['upload_headimg_integral']); //上传头像赠送积分
+						localStorage.setItem('set_nickname_integral', ret.msg['set_nickname_integral']); //设置昵称赠送积分
+						localStorage.setItem('upload_alipay_code_integral', ret.msg['upload_alipay_code_integral']); //上传支付宝收款码赠送积分
+						localStorage.setItem('wechat_login_code_integral', ret.msg['wechat_login_code_integral']); //微信快捷登录赠送积分
+						localStorage.setItem('agent_introduction_picture', ret.msg['agent_introduction_picture']); //代理升级介绍图片
+						localStorage.setItem('agent_upgrade_tips', ret.msg['agent_upgrade_tips']); //会员中心无代理权限弹窗提示
+						localStorage.setItem('touping_switch', ret.msg['touping_switch']); //会员中心投屏助手按钮开关
+						localStorage.setItem('touping_picture', ret.msg['touping_picture']); //会员中心投屏助手介绍图片
+						api.sendEvent({
+							name: 'newLoingdata',
+							extra: {}
+						});
+
+						api.hideProgress();
+
+						api.closeWin({});
+
+						// api.openWin({
+						//     name: 'index',
+						//     url: '../index.html',
+						// });
+					}
+				} else {
+					api.hideProgress();
+					/*   alert('网络错误！');
+					      原弹窗提示*/
+					api.toast({
+						msg: '网络错误 请检查!err01',
+						duration: 5000,
+						location: 'middle'
+					});
+
+					//alert( JSON.stringify( err ) );
+					return;
+				}
+			});
+		}
+
+		
+		//QQ登陆
+		function QQ_login() {
+			qq.login(function(ret, err) {
+				if(ret.status) {
+					Other_type = 'QQ';
+					QQ_getUserInfo(ret.openId);
+				} else {
+					//alert(JSON.stringify(err))
+					alert('QQ授权失败，请尝试重新登陆！')
+				}
+			});
+		}
+		//获取qq信息
+		function QQ_getUserInfo(QID) {
+			// city ：用户所在城市
+			// figureurl_qq_2   ：用户大头像（100）地址
+			// gender        ：用户性别
+			// is_yellow_vip  ：是否为黄钻用户
+			// level         ：用户账号级别
+			// nickname  ：用户昵称
+			// province    ：用户所在省份
+			// yellow_vip_level   ：用户账户黄钻等级
+			qq.getUserInfo(function(ret, err) {
+				if(ret.status) {
+					ret.info = JSON.parse(ret.info);
+					localStorage.setItem('Other_name', ret.info.nickname); // nickname  ：用户昵称
+					localStorage.setItem('qq_city', ret.info.city); // city ：用户所在城市
+					localStorage.setItem('Other_img', ret.info.figureurl_qq_2); // figureurl_qq_2   ：用户大头像（100）地址
+					localStorage.setItem('Other_openid', QID); // openid ：用户openid
+					
+					api.ajax({
+						url: api_url + '/login/login/is_wechat_register.html',
+						method: 'get',
+						data: {
+							values: {
+								key: 'p2piunink',
+								//安全码
+								username: localStorage.getItem('Other_openid')
+							}
+						}
+					},
+					function(ret, err) {
+						if (ret) {
+							if (ret.cun == 1) { //当前用户已存在
+								//	api.toast({
+								//		msg: '存在存在',
+								//		duration: 5000,
+								//	location : 'middle' 
+								//	});	
+								denglu(); // 直接登录
+							} else {
+
+								Other_Reg(); //     不存在就注册
+							}
+
+						} else {
+							//获取失败 网络错误
+							api.toast({
+								msg: '服务异常，err：' + err,
+								duration: 5000,
+								location: 'middle'
+							});
+
+						}
+
+					});
+					
+				} else {
+					//alert(JSON.stringify(err))
+					alert('用户信息获取失败，请尝试重新登陆！')
+				}
+			});
+		}
+
+		//微信调用登陆
+		function WX_login() {
+
+			var clipBoard = api.require('clipBoard');
+			clipBoard.get(function(ret, err) {
+				if (ret) {
+
+					if (ret.value.length == 6) {
+						var share = $api.byId('share');
+						share.value = ret.value;
+						/*	  api.toast({
+						  msg: '绑定归属成功',
+						  duration: 4000,
+						  location: 'middle' 
+					  });
+					  */
+					}
+				} else {
+					
+				}
+			});
+
+			wx.auth(function(ret, err) {
+				if (ret.status) {
+					//alert(JSON.stringify(ret));
+					WX_auth(ret.code)
+
+				} else {
+					if (err.code == 1) {
+						/*
+						alert('微信授权失败！请稍后重试！');
+						*/
+
+						api.toast({
+							msg: '授权失败！请稍后重试！',
+							duration: 5000,
+							location: 'middle'
+						});
+
+					}
+				}
+			});
+		}
+
+		function WX_auth(code) {
+
+			var auth_code = code;
+
+			wx.getToken({
+				apiKey: 'wx626d1381baaa363a',
+				apiSecret: '234cf117259c4915c8b381c9cf92e8d2',
+				code: auth_code
+			},
+			function(ret, err) {
+				if (ret.status) {
+					//alert(JSON.stringify(ret));
+					Other_type = '微信';
+
+					localStorage.setItem('Other_accessToken', ret.accessToken); // openid ：用户openid
+					var openId = ret.openId;
+					var accessToken = ret.accessToken;
+
+					WX_getUserInfo(openId, accessToken);
+				} else {
+
+					/*alert(err.code);  */
+					api.toast({
+						msg: '微信快捷登陆配置错误',
+						duration: 5000,
+						location: 'middle'
+					});
+
+				}
+			});
+		}
+		//获取微信信息
+		function WX_getUserInfo(Other_openid, Other_accessToken) {
+			//布尔型；true||false
+			//openid: '',        //字符串类型；普通用户的标识，对当前开发者帐号唯一
+			//nickname: '',      //字符串类型；普通用户昵称
+			//sex: 1,            //数字类型；普通用户性别，1为男性，2为女性
+			//headimgurl: '',    //字符串类型；用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空
+			//privilege: [],     //数组类型；用户特权信息，如微信沃卡用户为（chinaunicom）
+			//unionid: ''        //字符串类型；用户统一标识。针对一个微信开放平台帐号下的应用，同一用户的unionid是唯一的。
+			var accessToken = Other_accessToken;
+			var openId = Other_openid;
+			wx.getUserInfo({
+				accessToken: accessToken,
+				openId: openId
+			},
+			function(ret, err) {
+				if (ret.status) {
+					//alert(JSON.stringify(ret));
+					localStorage.setItem('Other_name', ret.nickname); // nickname  ：用户昵称
+					localStorage.setItem('Other_img', ret.headimgurl); // figureurl_qq_2   ：用户大头像（100）地址
+					localStorage.setItem('Other_openid', openId); // openid ：用户openid
+
+					api.ajax({
+						url: api_url + '/login/login/is_wechat_register.html',
+						method: 'get',
+						data: {
+							values: {
+								key: 'p2piunink',
+								//安全码
+								username: localStorage.getItem('Other_openid')
+							}
+						}
+					},
+					function(ret, err) {
+						if (ret) {
+							if (ret.cun == 1) { //当前用户已存在
+								//	api.toast({
+								//		msg: '存在存在',
+								//		duration: 5000,
+								//	location : 'middle' 
+								//	});	
+								denglu(); // 直接登录
+							} else {
+
+								Other_Reg(); //     不存在就注册
+							}
+
+						} else {
+							//获取失败 网络错误
+							api.toast({
+								msg: '网络连接异常',
+								duration: 5000,
+								location: 'middle'
+							});
+
+						}
+
+					});
+
+					//	Other_Reg();
+
+				} else {
+					api.toast({
+						msg: '授权信息获取失败',
+						duration: 5000,
+						location: 'middle'
+					});
+
+				}
+			});
+		}
+
+		function Other_Reg() {
+
+			if (share_code == '') {
+				var dialogBox = api.require('dialogBox');
+				dialogBox.inputbox({
+				   tapClose:true,
+					keyboardType: 'default',
+					texts: {
+						title: '邀请注册',
+						placeholder: '输入邀请码',
+						leftBtnTitle: '跳过',
+						rightBtnTitle: '确认'
+					},
+					styles: {
+						bg: '#fff',
+						corner: 2,
+						w: 300,
+						h: 240,
+						title: {
+							h: 60,
+							alignment: 'center',
+							size: 14,
+							color: '#000',
+							marginT:30,
+						},
+						input: {
+							h: 60,
+							y:30,
+							marginT:15,
+							marginLeft: 10,
+							marginRight:10,
+							textSize: 14,
+							textColor: '#000'
+						},
+						dividingLine: {
+							width: 0.5,
+							color: '#696969'
+						},
+						left: {
+							bg: 'rgba(0,0,0,0)',
+							color: '#007FFF',
+							size: 12
+						},
+						right: {
+							bg: 'rgba(0,0,0,0)',
+							color: '#007FFF',
+							size: 12
+						}
+					}
+				}, function(ret) {
+					if (ret.eventType == 'left') {
+					
+						share_code = '888888';
+						Other_Reg_Go();
+						
+						//关闭弹窗
+						var dialogBox = api.require('dialogBox');
+						dialogBox.close({
+							dialogName: 'inputbox'
+						});
+
+						//清空剪贴板
+						var clipBoard = api.require('clipBoard');
+						clipBoard.set({
+							value: '逐梦影视'
+						});
+						
+					}else{
+						if(ret.text === ''){
+							alert('请输入邀请码！');
+							//return;
+						}else{
+							share_code = ret.text;
+							Other_Reg_Go();
+
+							//关闭弹窗
+							var dialogBox = api.require('dialogBox');
+							dialogBox.close({
+								dialogName: 'inputbox'
+							});
+
+
+							//清空剪贴板
+							var clipBoard = api.require('clipBoard');
+							clipBoard.set({
+								value: '逐梦影视'
+							});
+						}
+					}
+				});
+			}
+		}
+
+function Other_Reg_Go(){
+	user = localStorage.getItem('Other_openid');
+	pass = localStorage.getItem('Other_openid');
+	Other_name = localStorage.getItem('Other_name') + '@' + Other_type + '注册';	//昵称@注册类型
+	
+	if (Other_type === 'QQ'){
+		Other_img = 'https://qlogo4.store.qq.com/qzone/2327299920/2327299920/100?1565718187';
+	}else{
+		Other_img = localStorage.getItem('Other_img');
+	}
+	//share_code = $api.val($api.byId('share')); //邀请码
+	
+	//检查数据
+	//alert( user +'--'+ pass +'--'+ Other_name +'--'+ Other_img +'--'+ share_code);
+	
+	//	api.toast({
+	//		msg: share_code,
+	//		duration: 5000,
+	//	location : 'middle' 
+	//	});	
+	//			return;
+
+	api.toast({
+		msg: Other_type + '注册中',
+		duration: 2000,
+		location: 'middle'
+	});
+	
+
+	api.ajax({
+		url: api_url + '/login/login/weixin_create.html',
+		//注册
+		method: 'get',
+		data: {
+			values: {
+				key: 'p2piunink',
+				//安全码
+				name: user,
+				password: pass,
+				share_ma: share_code,
+				deviceId: api.deviceId,
+				nick_name: Other_name,
+				headimgurl: Other_img,
+				type: Other_type
+			}
+		}
+	},
+	function(ret, err) {
+		if (ret) {
+
+			if (ret.code == 10) { //  账户已存在  
+				api.toast({
+					msg: ret.msg,
+					duration: 5000,
+					location: 'middle'
+				});
+				window.location.reload();
+			} else if (ret.code == 9) { // 请向邀请人索取正确邀请码
+				api.toast({
+					msg: ret.msg,
+					duration: 5000,
+					location: 'middle'
+				});
+				window.location.reload();
+			} else if (ret.code == 0) { // 您已注册过账户   安全码错误   注册失败
+				api.toast({
+					msg: ret.msg,
+					duration: 5000,
+					location: 'middle'
+				});
+				window.location.reload();
+			} else if (ret.code == 1) { //注册成功
+				//准备登录
+				api.toast({
+					msg: '注册成功',
+					duration: 5000,
+					location: 'middle'
+				});
+				denglu();
+			}
+			api.hideProgress();
+
+		} else {
+			api.hideProgress();
+			api.toast({
+				msg: '网络错误！err:' + ret.code,
+				duration: 5000,
+				location: 'middle'
+			});
+			window.location.reload();
+		}
+	});
+}
+
+		//注册并登录
+		function denglu() {
+
+			localStorage.setItem('accountLogin', 1);
+			var user = localStorage.getItem('Other_openid');
+			var pass = localStorage.getItem('Other_openid');
+			api.showProgress({
+				title: '处理中',
+				text: '请稍等',
+				modal: false
+			});
+			api.ajax({
+				url: api_url + '/login/login/veifys.html',
+				method: 'get',
+				data: {
+					values: {
+						key: 'p2piunink',
+						//安全码
+						username: user,
+						passwd: pass,
+						imei: api.deviceId
+					}
+				}
+			},
+			function(ret, err) {
+				if (ret) {
+					if (ret.code == 9) { //封禁
+						api.hideProgress();
+						api.toast({
+							msg: ret.status,
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+					} else if (ret.code == 8) { //开启设备限制
+						api.hideProgress();
+						api.toast({
+							msg: ret.status,
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+
+					} else if (ret.code == 3) {
+						api.hideProgress();
+						api.toast({
+							msg: '安全码错误 请联系微信 2327299920',
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+					} else if (ret.code == 0) {
+						api.hideProgress();
+						api.toast({
+							msg: ret.msg,
+							duration: 5000,
+							location: 'middle'
+						});
+
+						return;
+					} else if (ret.code == 10) {
+						api.hideProgress();
+
+						//	api.toast({
+						//		msg: ret.msg,
+						//		duration: 5000,
+						//		location : 'middle' 
+						//	});
+
+						var dialogBox = api.require('dialogBox');
+						dialogBox.alert({
+							texts: {
+								//	title: '智能识别',
+								content: ret.msg,
+								leftBtnTitle: '知道了',
+								//	rightBtnTitle: '确认并使用'
+							},
+							styles: {
+								bg: '#fff',
+								w: 300,
+								corner: 10,
+								title: {
+									marginT: 20,
+									icon: 'widget://Ryanimg/frame0/rrrr.png',
+									iconSize: 20,
+									titleSize: 14,
+									titleColor: '#999'
+								},
+								content: {
+									marginT: 20,
+									//（可选项）数字类型；内容文本顶端与标题栏底端的距离，如果标题栏不存在，则是到窗口顶端的距离；默认：20
+									marginB: 20,
+									//（可选项）数字类型；内容文本底端与 left/right 顶端的距离，如果 left/right 都不存在，则是到对话框底端的距离；默认：20
+									color: '#999',
+									size: 14
+								},
+								left: {
+									marginB: 30,
+									marginL: 100,
+									w: 100,
+									h: 35,
+									corner: 2,
+									bg: '#eeeeee',
+									color: '#999',
+									//（可选项）字符串类型；右边按钮标题字体颜色，支持rgb、rgba、#；默认：'#007FFF'
+									size: 12
+								}
+
+							}
+						},
+						function(ret) {
+
+							if (ret.eventType == 'left') {
+
+								//关闭弹窗
+								var dialogBox = api.require('dialogBox');
+								dialogBox.close({
+									dialogName: 'alert'
+								});
+
+								//清空剪贴板
+								var clipBoard = api.require('clipBoard');
+								clipBoard.set({
+									value: '逐梦影视'
+								});
+
+							}
+
+						});
+
+						return;
+					} else if (ret.code == 1) {
+						api.hideProgress();
+						api.toast({
+							msg: '登陆成功！',
+							duration: 5000,
+							location: 'middle'
+						});
+
+						//alert( JSON.stringify( ret ) );
+						localStorage.setItem('accountLogin', 0);
+
+						localStorage.setItem('user_id', ret.msg['id']); //用户ID
+						localStorage.setItem('nick_name', ret.msg['nick_name']); //昵称
+						localStorage.setItem('parentid', ret.msg['parentid']); //父ID
+						localStorage.setItem('status', ret.msg['status']); //封号状态
+						localStorage.setItem('app_name', ret.msg['app_name']); //APP名字
+						localStorage.setItem('player_starttimes', ret.msg['player_starttimes']); //播放器记录设置
+						localStorage.setItem('user_name', user); //用户名
+						localStorage.setItem('password', pass); //密码
+						localStorage.setItem('user_time', ret.msg['time']); //会员到期时间
+						localStorage.setItem('sign', ret.msg['sign']); //积分
+						localStorage.setItem('share_ma', ret.msg['share_ma']); //邀请码
+						localStorage.setItem('money', ret.msg['money']); //余额
+						localStorage.setItem('headimgurl', ret.msg['headimgurl']); //头像
+						localStorage.setItem('txje', ret.msg['txje']); //提现金额
+						localStorage.setItem('vip1', ret.msg['vip1']); //体验
+						localStorage.setItem('vip2', ret.msg['vip2']); //月卡
+						localStorage.setItem('vip3', ret.msg['vip3']); //季卡
+						localStorage.setItem('vip4', ret.msg['vip4']); //半年
+						localStorage.setItem('vip5', ret.msg['vip5']); //一年
+						localStorage.setItem('vip6', ret.msg['vip6']); //永久
+						localStorage.setItem('daili_price', ret.msg['daili_price']); //代理升级价格
+						localStorage.setItem('zfb', ret.msg['zfb']); //支付宝
+						localStorage.setItem('qdtime', ret.msg['qdtime']); //签到时间
+						//	localStorage.setItem('user_advert', ret.msg['advert']);
+						//	localStorage.setItem('user_code', ret.msg['code']);			
+						localStorage.setItem('user_weichat', ret.msg['weichat']); //上级微信
+						localStorage.setItem('tudi', ret.msg['tudi']); //团队数量
+						localStorage.setItem('power', ret.msg['power']); //权限
+						localStorage.setItem('Source', ret.msg['Source']); //来源
+						localStorage.setItem('app_working_mode', ret.msg['app_working_mode']); //APP 工作模式   
+						localStorage.setItem('vip_movies_theme', ret.msg['vip_movies_theme']); //VIP 影视主题
+						localStorage.setItem('app_share_help', ret.msg['app_share_help']); //APP邀请页帮助信息
+						localStorage.setItem('app_Invitation_slogans', ret.msg['app_Invitation_slogans']); //APP分享 邀请标语
+						localStorage.setItem('app_secret_key', ret.msg['app_secret_key']); //APP 私人影片kEY
+						localStorage.setItem('app_secret_content', ret.msg['app_secret_content']); //APP 私人影片公告
+						localStorage.setItem('index_video_num', ret.msg['index_video_num']); //首页调用推荐影视数量
+						localStorage.setItem('look_record_num', ret.msg['look_record_num']); //观看记录保留数量
+						localStorage.setItem('upload_headimg_integral', ret.msg['upload_headimg_integral']); //上传头像赠送积分
+						localStorage.setItem('set_nickname_integral', ret.msg['set_nickname_integral']); //设置昵称赠送积分
+						localStorage.setItem('upload_alipay_code_integral', ret.msg['upload_alipay_code_integral']); //上传支付宝收款码赠送积分
+						localStorage.setItem('wechat_login_code_integral', ret.msg['wechat_login_code_integral']); //微信快捷登录赠送积分
+						localStorage.setItem('agent_introduction_picture', ret.msg['agent_introduction_picture']); //代理升级介绍图片
+						localStorage.setItem('agent_upgrade_tips', ret.msg['agent_upgrade_tips']); //会员中心无代理权限弹窗提示
+						localStorage.setItem('touping_switch', ret.msg['touping_switch']); //会员中心投屏助手按钮开关
+						localStorage.setItem('touping_picture', ret.msg['touping_picture']); //会员中心投屏助手介绍图片
+						api.sendEvent({
+							name: 'newLoingdata',
+							extra: {}
+						});
+
+						api.hideProgress();
+
+						api.closeWin({});
+
+						// api.openWin({
+						//     name: 'index',
+						//     url: '../index.html',
+						// });
+					}
+				} else {
+					api.hideProgress();
+					api.toast({
+						msg: '网络错误 请检查！err03',
+						duration: 5000,
+						location: 'middle'
+					});
+
+					//alert( JSON.stringify( err ) );
+					return;
+				}
+			}
+
+			);
+		}
+	</script>
+
+</html>
